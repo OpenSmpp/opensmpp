@@ -17,7 +17,7 @@ bug fixes, and has been generally refactored.
 
 # Versions
 
-Versions of this project are managed according to
+Versions of this project are managed according to the
 [Semantic Versioning](http://semver.org) specification.
 
 # Build Status
