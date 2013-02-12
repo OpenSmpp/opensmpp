@@ -10,5 +10,6 @@ and more. It is based on the original
 [Logica OpenSMPP API](http://opensmpp.logica.com/).
 
 See also:
-[About](./about.html)
-[Specifications](./specifications.html)
+
+ *  [About](./about.html)
+ *  [Specifications](./specifications.html)
