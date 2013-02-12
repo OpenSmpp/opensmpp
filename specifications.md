@@ -5,7 +5,7 @@ title: Specifications - OpenSmpp
 ## Specifications:
 
  *  [SMPP spec v3.4](./specs/SMPP_v3_4_Issue1_2.pdf)
- *  [SMPP spec v5.0](./specs/smppv50.7z)
+ *  [SMPP spec v5.0](./specs/smppv50.pdf)
  *  [SMPP IF spec v3.3](./specs/SMPP-IF-SPEC.v3.3.pdf)
 
 ## Implementation Guides:
