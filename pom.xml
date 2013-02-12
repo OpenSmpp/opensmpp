@@ -12,7 +12,7 @@
 	<description>
 		OpenSmpp - Java library implementing the SMPP protocol, and allowing development of External Short Message Entities (ESMEs) and more
 	</description>
-	<url>http://github.com/ptomli/opensmpp</url>
+	<url>http://opensmpp.org/</url>
 
 	<modules>
 		<module>core</module>
