@@ -4,9 +4,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.smpp</groupId>
+	<groupId>org.opensmpp</groupId>
 	<artifactId>opensmpp-parent</artifactId>
-	<version>2.4.0-SNAPSHOT</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>OpenSMPP</name>
 	<description>
@@ -118,22 +118,22 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.smpp</groupId>
+				<groupId>org.opensmpp</groupId>
 				<artifactId>opensmpp-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.smpp</groupId>
+				<groupId>org.opensmpp</groupId>
 				<artifactId>opensmpp-charset</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.smpp</groupId>
+				<groupId>org.opensmpp</groupId>
 				<artifactId>opensmpp-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.smpp</groupId>
+				<groupId>org.opensmpp</groupId>
 				<artifactId>opensmpp-sim</artifactId>
 				<version>${project.version}</version>
 			</dependency>

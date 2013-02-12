@@ -15,6 +15,11 @@ bug fixes, and has been generally refactored.
  *  client - a simple SMPP client
  *  sim - a simple SMSC simulator
 
+# Versions
+
+Versions of this project are managed according to
+[Semantic Versioning](http://semver.org) specification.
+
 # Build Status
 
 [![Build Status](https://travis-ci.org/ptomli/opensmpp.png?branch=master)](https://travis-ci.org/ptomli/opensmpp)
