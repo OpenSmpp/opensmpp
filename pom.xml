@@ -79,11 +79,21 @@
 		<developerConnection>scm:git:git@github.com:ptomli/opensmpp.git</developerConnection>
 	</scm>
 
-
 	<issueManagement>
 		<system>github</system>
 		<url>http://github.com/ptomli/opensmpp/issues</url>
 	</issueManagement>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
 
 	<profiles>
 		<profile>
