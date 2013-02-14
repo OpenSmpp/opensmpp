@@ -1,5 +1,6 @@
 ---
 title: OpenSmpp - a mature Java library implementing the SMPP protocol
+layout: default
 ---
 
 <a href="https://github.com/ptomli/opensmpp">

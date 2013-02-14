@@ -1,5 +1,6 @@
 ---
 title: Specifications - OpenSmpp
+layout: default
 ---
 
 # Specifications:

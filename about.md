@@ -1,5 +1,6 @@
 ---
 title: About - OpenSmpp
+layout: default
 ---
 
 # About OpenSmpp

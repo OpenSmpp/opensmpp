@@ -1,5 +1,6 @@
 ---
 title: Roadmap - OpenSmpp
+layout: default
 ---
 
 # Roadmap

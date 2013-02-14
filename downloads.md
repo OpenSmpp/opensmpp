@@ -1,5 +1,6 @@
 ---
 title: Downloads - OpenSmpp
+layout: default
 ---
 
 <a href="https://github.com/ptomli/opensmpp">
