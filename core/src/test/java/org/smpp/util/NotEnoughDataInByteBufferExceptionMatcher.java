@@ -18,7 +18,6 @@ public class NotEnoughDataInByteBufferExceptionMatcher extends TypeSafeMatcher<N
 		this.available = available;
 	}
 
-	@Override
 	public void describeTo(Description description) {
 		description
 			.appendText("expected ")
