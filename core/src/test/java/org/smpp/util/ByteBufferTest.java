@@ -187,6 +187,33 @@ public class ByteBufferTest {
 	}
 
 	@Test
+	public void testReadBytesWithZeroCountReturnsNull() throws Exception {
+		assertNull(buffer.readBytes(0));
+	}
+
+	@Test
+	public void testReadBytesWithCountReadFirst() throws Exception {
+		buffer = bufferOf(A, B, C);
+		ByteBuffer b = buffer.readBytes(2);
+		assertArrayEquals(new byte[] { A, B}, b.getBuffer());
+	}
+
+	@Test
+	public void testReadBytesWithCountDoesNotReduceBuffer() throws Exception {
+		buffer = bufferOf(A, B, C);
+		buffer.readBytes(2);
+		assertEquals(3, buffer.length());
+	}
+
+	@Test
+	public void testReadBytesWithExcessiveCountThrowsException() throws Exception {
+		thrown.expect(NotEnoughDataInByteBufferException.class);
+		thrown.expect(notEnoughData(1, 0));
+
+		buffer.readBytes(1);
+	}
+
+	@Test
 	public void testRemoveByteFromNullThrowsException() throws Exception {
 		thrown.expect(NotEnoughDataInByteBufferException.class);
 		thrown.expect(notEnoughData(1, 0));
@@ -439,6 +466,16 @@ public class ByteBufferTest {
 		buffer = bufferOf(A, B, C);
 		buffer.removeBuffer(3);
 		assertEquals(0, buffer.length());
+	}
+
+	@Test
+	public void testHexDump() {
+		assertEquals("414243", bufferOf(A, B, C).getHexDump());
+	}
+
+	@Test
+	public void testHexDumpWithNullBuffer() {
+		assertEquals("", buffer.getHexDump());
 	}
 
 	private static ByteBuffer bufferOf(byte... bytes) {
