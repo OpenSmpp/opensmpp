@@ -17,3 +17,5 @@ See also:
 
  *  [About](./about.html)
  *  [Specifications](./specifications.html)
+ *  [Downloads](./downloads.html)
+ *  [Roadmap](./roadmap.html)

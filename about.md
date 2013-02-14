@@ -2,7 +2,9 @@
 title: About - OpenSmpp
 ---
 
-The OpenSMPP API is an open source Java library implementing the SMPP (Short
+# About OpenSmpp
+
+The OpenSmpp API is an open source Java library implementing the SMPP (Short
 Message Peer to Peer) protocol. It is based on the original
 [Logica OpenSMPP API](http://opensmpp.logica.com/).
 

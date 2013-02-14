@@ -2,7 +2,7 @@
 title: Specifications - OpenSmpp
 ---
 
-## Specifications:
+# Specifications:
 
  *  [SMPP spec v3.4](./specs/SMPP_v3_4_Issue1_2.pdf)
  *  [SMPP spec v5.0](./specs/smppv50.pdf)
