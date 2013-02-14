@@ -15,22 +15,18 @@ Once there is a 3.0.0 RELEASE we will get the artifacts into Central.
 
 In the meantime, add a repository for Sonatype OSS
 
-```xml
 	<repository>
 		<id>sonatype-oss</id>
 		<url>https://oss.sonatype.org/content/groups/public</url>
 	</repository>
-```
 
 Add a dependency for `opensmpp-core`
 
-```xml
     <dependency>
     	<groupId>org.opensmpp</groupId>
     	<artifactId>opensmpp-core</artifactId>
     	<version>3.0.0-SNAPSHOT</version>
     </dependency>
-```
 
 ## JARs
 
