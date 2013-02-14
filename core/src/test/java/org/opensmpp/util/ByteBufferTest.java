@@ -3,6 +3,8 @@ package org.opensmpp.util;
 import static org.junit.Assert.*;
 import static org.opensmpp.util.NotEnoughDataInByteBufferExceptionMatcher.*;
 
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,7 +15,13 @@ import org.opensmpp.util.TerminatingZeroNotFoundException;
 
 public class ByteBufferTest {
 
+	private static final String ABC = "ABC";
 	private static final String ASCII = "ASCII";
+	private static final String INVALID = "INVALID";
+	private static final byte NULL = 0x00;
+	private static final byte A = 0x41;
+	private static final byte B = 0x42;
+	private static final byte C = 0x43;
 
 	private ByteBuffer buffer;
 	private byte t_bite = (byte) 0x1f;
@@ -54,14 +62,51 @@ public class ByteBufferTest {
 
 	@Test
 	public void testAppendCString0() {
-		buffer.appendCString("ABC");
-		assertBufferMatches(new byte[] { 0x41, 0x42, 0x43, 0x00 });
+		buffer.appendCString(ABC);
+		assertBufferMatches(new byte[] { A, B, C, NULL });
+	}
+
+	@Test
+	public void testAppendCStringWithInvalidEncodingThrowsException() throws Exception {
+		thrown.expect(UnsupportedEncodingException.class);
+		buffer.appendCString(ABC, INVALID);
 	}
 
 	@Test
 	public void testAppendString() {
-		buffer.appendString("ABC");
-		assertBufferMatches(new byte[] { 0x41, 0x42, 0x43 });
+		buffer.appendString(ABC);
+		assertBufferMatches(new byte[] { A, B, C });
+	}
+
+	@Test
+	public void testAppendStringWithCount() {
+		buffer.appendString(ABC, 2);
+		assertBufferMatches(new byte[] { A, B });
+	}
+
+	@Test
+	public void testAppendStringWithZeroCountToNullBuffer() {
+		buffer.appendString(ABC, 0);
+		assertNull(buffer.getBuffer());
+	}
+
+	@Test
+	public void testAppendStringWithZeroCount() {
+		buffer = new ByteBuffer(new byte[] { });
+		buffer.appendString(ABC, 0);
+		assertBufferMatches(new byte[] { });
+	}
+
+	@Test
+	public void testAppendStringWithExcessiveCountThrowsException() throws Exception {
+		thrown.expect(StringIndexOutOfBoundsException.class);
+		buffer.appendString(ABC, 4);
+	}
+
+	@Test
+	public void testAppenStringWithCountAndInvalidEncodingThrowsException() throws Exception {
+		thrown.expect(UnsupportedEncodingException.class);
+		buffer.appendString(ABC, 1, INVALID);
 	}
 
 	@Test
@@ -105,6 +150,25 @@ public class ByteBufferTest {
 	}
 
 	@Test
+	public void testAppendBufferWithNullDoesNothing() {
+		buffer = new ByteBuffer(new byte[] { NULL });
+		buffer.appendBuffer(null);
+		assertBufferMatches(new byte[] { NULL });
+	}
+
+	@Test
+	public void testAppendBufferWithEmptyDoesNothing() {
+		buffer.appendBuffer(new ByteBuffer(new byte[] {}));
+		assertNull(buffer.getBuffer());
+	}
+
+	@Test
+	public void testAppendBuferAppendsAll() {
+		buffer.appendBuffer(new ByteBuffer(new byte[] { A, B, C }));
+		assertBufferMatches(new byte[] { A, B, C });
+	}
+
+	@Test
 	public void testRemoveByteFromNullThrowsException() throws Exception {
 		thrown.expect(NotEnoughDataInByteBufferException.class);
 		thrown.expect(notEnoughData(1, 0));
@@ -119,6 +183,20 @@ public class ByteBufferTest {
 
 		buffer = new ByteBuffer(new byte[] { });
 		buffer.removeByte();
+	}
+
+	@Test
+	public void testRemoveByteRemovesFirstByte() throws Exception {
+		buffer = new ByteBuffer(new byte[] { A, B, C });
+		byte bite = buffer.removeByte();
+		assertEquals(A, bite);
+	}
+
+	@Test
+	public void testRemoveByteReducesBuffer() throws Exception {
+		buffer = new ByteBuffer(new byte[] { A, B, C });
+		buffer.removeByte();
+		assertEquals(2, buffer.length());
 	}
 
 	@Test
@@ -139,6 +217,20 @@ public class ByteBufferTest {
 	}
 
 	@Test
+	public void testRemoveShortRemovesFirstShort() throws Exception {
+		buffer = new ByteBuffer(new byte[] { 0x01, 0x02, 0x03, 0x04 });
+		short s = buffer.removeShort();
+		assertEquals((1 << 8) + 2, s);
+	}
+
+	@Test
+	public void testRemoveShortReducesBuffer() throws Exception {
+		buffer = new ByteBuffer(new byte[] { 0x01, 0x02, 0x03, 0x04 });
+		buffer.removeShort();
+		assertEquals(2, buffer.length());
+	}
+
+	@Test
 	public void testReadIntFromNullThrowsException() throws Exception {
 		thrown.expect(NotEnoughDataInByteBufferException.class);
 		thrown.expect(notEnoughData(4, 0));
@@ -147,7 +239,21 @@ public class ByteBufferTest {
 	}
 
 	@Test
-	public void testReadInFromSmallBufferThrowsException() throws Exception {
+	public void testReadIntReadsFirstInt() throws Exception {
+		buffer = new ByteBuffer(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08 });
+		int i = buffer.readInt();
+		assertEquals((1 << 24) + (2 << 16) + (3 << 8) + 4, i);
+	}
+
+	@Test
+	public void testReadIntDoesNotReduceBuffer() throws Exception {
+		buffer = new ByteBuffer(new byte[] { 0x01, 0x02, 0x03, 0x04 });
+		buffer.readInt();
+		assertEquals(4, buffer.length());
+	}
+
+	@Test
+	public void testReadIntFromSmallBufferThrowsException() throws Exception {
 		thrown.expect(NotEnoughDataInByteBufferException.class);
 		thrown.expect(notEnoughData(4, 2));
 
