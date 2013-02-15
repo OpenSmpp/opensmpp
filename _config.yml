@@ -1,0 +1,9 @@
+safe: true
+auto: true
+server: true
+server_port: 8080
+url: http://opensmpp.org
+pygments: true
+future: false
+lsi: false
+permalink: /post/:title.html
