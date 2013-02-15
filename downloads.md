@@ -3,7 +3,7 @@ title: Downloads - OpenSmpp
 layout: default
 ---
 
-<a href="https://github.com/ptomli/opensmpp">
+<a href="https://github.com/OpenSmpp/opensmpp">
 	<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
 </a>
 
@@ -47,10 +47,10 @@ Add a dependency for `opensmpp-core`
 
 The source code is hosted on [GitHub](https://github.com).
 
-See [https://github.com/ptomli/opensmpp](https://github.com/ptomli/opensmpp)
+See [https://github.com/OpenSmpp/opensmpp](https://github.com/OpenSmpp/opensmpp)
 
 Please feel free to fork the repository and submit pull requests.
 
 A ZIP file of the current `master` branch can be downloaded
-[here](https://github.com/ptomli/opensmpp/archive/master.zip).
+[here](https://github.com/OpenSmpp/opensmpp/archive/master.zip).
 
