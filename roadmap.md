@@ -6,7 +6,7 @@ layout: default
 # Roadmap
 
 We are using [Semantic Versioning](http://semver.org) for releases, which
-dictates how version numbers change with respect to the APII contract.
+dictates how version numbers change with respect to the API contract.
 
 ## 3.0.0
 
@@ -18,7 +18,7 @@ The increase in major number is as a result of the repackaging into seperate
 modules.
 
 Following this release, we will be bring the code in line with current best
-practices, making use of stadard JDK types and Java 5+ techniques.
+practices, making use of standard JDK types and Java 5+ techniques.
 
 In order to ease the transistion of existing codebases, which may have relied on
 the previous API for over ten years, there will remain a compatibility layer to
