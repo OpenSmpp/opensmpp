@@ -5,8 +5,16 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.smpp.Data;
 import org.smpp.util.ByteBuffer;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(Data.class)
 public class AddressTest {
 
 	// TODO: check the actual values allowed in smpp, but
@@ -38,12 +46,72 @@ public class AddressTest {
 		assertEquals("", address.getAddress());
 	}
 
-	// TODO: Address(int)
-	// TODO: Address(byte, byte, int)
-	// TODO: Address(String)
-	// TODO: Address(String, int)
-	// TODO: Address(byte, byte, String)
-	// TODO: Address(byte, byte, String, int)
+	@Test
+	public void testDefaultsFromData() throws Exception {
+		PowerMockito.mockStatic(Data.class);
+		Mockito.when(Data.getDefaultTon()).thenReturn((byte) 0x11);
+		Mockito.when(Data.getDefaultNpi()).thenReturn((byte) 0x12);
+		address = new Address();
+		assertEquals(0x11, address.getTon());
+		assertEquals(0x12, address.getNpi());
+	}
+
+	@Test
+	public void testDefaultMaxAddressLengthAllpws20Digits() throws Exception {
+		String a = address(20);
+		address.setAddress(a);
+		assertEquals(a, address.getAddress());
+	}
+	@Test(expected = WrongLengthOfStringException.class)
+	public void testDefaultMaxAddressLengthDissalows21Digits() throws Exception {
+		address.setAddress(address(21));
+	}
+
+	@Test(expected = WrongLengthOfStringException.class)
+	public void testConstructorIntSpecifiesAddressMaxLength() throws Exception {
+		address = new Address(5);
+		address.setAddress(address(5));
+	}
+
+	@Test(expected = WrongLengthOfStringException.class)
+	public void testConstructorByteByteIntSpecifiesTonNpiLength() throws Exception {
+		address = new Address((byte) 0x01, (byte) 0x02, 5);
+		assertEquals(0x01, address.getTon());
+		assertEquals(0x02, address.getNpi());
+		address.setAddress(address(5));
+	}
+
+	@Test
+	public void testConstructorStringSpecifiesAddress() throws Exception {
+		assertEquals("1234", new Address("1234").getAddress());
+	}
+
+	@Test(expected = WrongLengthOfStringException.class)
+	public void testConstructorStringUsesDefaultMaxLength() throws Exception {
+		new Address(address(21));
+	}
+
+	@Test(expected = WrongLengthOfStringException.class)
+	public void testConstructorStringIntSpecifiesAddressLength() throws Exception {
+		new Address(address(5), 5);
+	}
+
+	@Test
+	public void testConstructorByteByteString() throws Exception {
+		address = new Address((byte) 0x01, (byte) 0x02, "ABC");
+		assertEquals(0x01, address.getTon());
+		assertEquals(0x02, address.getNpi());
+		assertEquals("ABC", address.getAddress());
+	}
+
+	@Test(expected = WrongLengthOfStringException.class)
+	public void testConstructorByteByteStringInt() throws Exception {
+		address = new Address((byte) 0x01, (byte) 0x02, "ABC", 4);
+		assertEquals(0x01, address.getTon());
+		assertEquals(0x02, address.getNpi());
+		assertEquals("ABC", address.getAddress());
+		address = new Address((byte) 0x01, (byte) 0x02, "ABCD", 4);
+	}
 
 	@Test
 	public void testSetData() throws Exception {
@@ -88,12 +156,29 @@ public class AddressTest {
 			assertEquals(npi, address.getNpi());
 		}
 	}
-	// TODO: Address#setAddress(String)
-	// - with min length
-	// - with max length
-	// TODO: Address#setAddress(String, int)
-	// - with min length
-	// - with max length
+
+	@Test
+	public void testGetAddressWithEncoding() throws Exception {
+		address.setAddress("ABCD");
+		assertEquals("\u4142\u4344", address.getAddress("UTF-16BE"));
+	}
+
+	@Test
+	public void testGetAddressWithInvalidEncoding() throws Exception {
+		address.setAddress("ABCD");
+		assertEquals("ABCD", address.getAddress("X-INVALID"));
+	}
+
+	@Test
+	public void testSetAddressInt() throws Exception {
+		String a = address(9);
+		address.setAddress(a, 10);
+		assertEquals(a, address.getAddress());
+	}
+	@Test(expected = WrongLengthOfStringException.class)
+	public void testSetAddressIntLimitsLength() throws Exception {
+		address.setAddress(address(10), 10);
+	}
 
 	@Test
 	public void testDebugString() throws Exception {
