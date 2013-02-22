@@ -11,10 +11,33 @@ layout: default
 
 ## Maven
 
-Maven SNAPSHOT hosting is gratiously provided by [Sonatype](http://www.sonatype.com).
-Once there is a 3.0.0 RELEASE we will get the artifacts into Central.
+The core library is contained in `opensmpp-core`.
 
-In the meantime, add a repository for Sonatype OSS
+{% highlight xml %}
+<dependency>
+	<groupId>org.opensmpp</groupId>
+	<artifactId>opensmpp-core</artifactId>
+	<version>3.0.0</version>
+</dependency>
+{% endhighlight %}
+
+The simulator and client are within `opensmpp-sim` and `opensmpp-client`, respectively.
+
+{% highlight xml %}
+<dependency>
+	<groupId>org.opensmpp</groupId>
+	<artifactId>opensmpp-sim</artifactId>
+	<version>3.0.0</version>
+</dependency>
+
+<dependency>
+	<groupId>org.opensmpp</groupId>
+	<artifactId>opensmpp-client</artifactId>
+	<version>3.0.0</version>
+</dependency>
+{% endhighlight %}
+
+Maven SNAPSHOT hosting is gratiously provided by [Sonatype](http://www.sonatype.com).
 
 {% highlight xml %}
 <repository>
@@ -23,24 +46,22 @@ In the meantime, add a repository for Sonatype OSS
 </repository>
 {% endhighlight %}
 
-Add a dependency for `opensmpp-core`
-
 {% highlight xml %}
 <dependency>
 	<groupId>org.opensmpp</groupId>
 	<artifactId>opensmpp-core</artifactId>
-	<version>3.0.0-SNAPSHOT</version>
+	<version>3.0.1-SNAPSHOT</version>
 </dependency>
 {% endhighlight %}
 
 ## JARs
 
- *  [opensmpp-core](https://oss.sonatype.org/content/groups/public/org/opensmpp/opensmpp-core/3.0.0-SNAPSHOT/)
+ *  [opensmpp-core](https://repo1.maven.org/maven2/org/opensmpp/opensmpp-core/3.0.0/opensmpp-core-3.0.0.jar)
     Requires `opensmpp-charset`
- *  [opensmpp-charset](https://oss.sonatype.org/content/groups/public/org/opensmpp/opensmpp-charset/3.0.0-SNAPSHOT/)
- *  [opensmpp-client](https://oss.sonatype.org/content/groups/public/org/opensmpp/opensmpp-client/3.0.0-SNAPSHOT/)
+ *  [opensmpp-charset](https://repo1.maven.org/maven2/org/opensmpp/opensmpp-charset/3.0.0/opensmpp-charset-3.0.0.jar)
+ *  [opensmpp-client](https://repo1.maven.org/maven2/org/opensmpp/opensmpp-client/3.0.0/opensmpp-client-3.0.0.jar)
     Requires `opensmpp-core`
- *  [opensmpp-sim](https://oss.sonatype.org/content/groups/public/org/opensmpp/opensmpp-sim/3.0.0-SNAPSHOT/)
+ *  [opensmpp-sim](https://repo1.maven.org/maven2/org/opensmpp/opensmpp-sim/3.0.0/opensmpp-3.0.0.jar)
     Requires `opensmpp-core`
 
 ## Source

@@ -18,6 +18,16 @@ and more. It is based on the original
 
  *  Java 1.5
 
+## Maven Quick Info
+
+{% highlight xml %}
+<dependency>
+	<groupId>org.opensmpp</groupId>
+	<artifactId>opensmpp-core</artifactId>
+	<version>3.0.0</version>
+</dependency>
+{% endhighlight %}
+
 See also:
 
  *  [About](./about.html)
