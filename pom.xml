@@ -74,14 +74,14 @@
 	</developers>
 
 	<scm>
-		<url>https://github.com/ptomli/opensmpp</url>
-		<connection>scm:git:git://github.com/ptomli/opensmpp.git</connection>
-		<developerConnection>scm:git:git@github.com:ptomli/opensmpp.git</developerConnection>
+		<url>https://github.com/OpenSmpp/opensmpp</url>
+		<connection>scm:git:git://github.com/OpenSmpp/opensmpp.git</connection>
+		<developerConnection>scm:git:git@github.com:OpenSmpp/opensmpp.git</developerConnection>
 	</scm>
 
 	<issueManagement>
 		<system>github</system>
-		<url>http://github.com/ptomli/opensmpp/issues</url>
+		<url>http://github.com/OpenSmpp/opensmpp/issues</url>
 	</issueManagement>
 
 	<distributionManagement>
