@@ -234,8 +234,10 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
 					<mavenExecutorId>forked-path</mavenExecutorId>
 					<preparationGoals>clean test</preparationGoals>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
 				</configuration>
 			</plugin>
 		</plugins>
