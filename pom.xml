@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.opensmpp</groupId>
 	<artifactId>opensmpp-parent</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>OpenSMPP</name>
 	<description>
@@ -75,7 +75,7 @@
 		<url>https://github.com/OpenSmpp/opensmpp</url>
 		<connection>scm:git:git://github.com/OpenSmpp/opensmpp.git</connection>
 		<developerConnection>scm:git:git@github.com:OpenSmpp/opensmpp.git</developerConnection>
-	  <tag>v3.0.0</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<issueManagement>
