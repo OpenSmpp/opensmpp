@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.powermock.reflect.Whitebox;
 
 public class ByteDataTest {
 	private static Class<?> CLAZZ = ByteData.class;
@@ -121,15 +122,15 @@ public class ByteDataTest {
 	}
 
 	private short decodeUnsigned(byte bite) throws Exception {
-		return invokeMethod(CLAZZ, "decodeUnsigned", bite);
+		return Whitebox.<Short> invokeMethod(CLAZZ, "decodeUnsigned", bite);
 	}
 	private int decodeUnsigned(short value) throws Exception {
-		return invokeMethod(CLAZZ, "decodeUnsigned", value);
+		return Whitebox.<Integer> invokeMethod(CLAZZ, "decodeUnsigned", value);
 	}
 	private byte encodeUnsigned(short value) throws Exception {
-		return invokeMethod(CLAZZ, "encodeUnsigned", value);
+		return Whitebox.<Byte> invokeMethod(CLAZZ, "encodeUnsigned", value);
 	}
 	private short encodeUnsigned(int positive) throws Exception {
-		return invokeMethod(CLAZZ, "encodeUnsigned", positive);
+		return Whitebox.<Short> invokeMethod(CLAZZ, "encodeUnsigned", positive);
 	}
 }
