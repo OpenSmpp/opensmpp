@@ -3,7 +3,7 @@
 Java library implementing the SMPP protocol, and allowing development of
 External Short Message Entities (ESMEs) and more
 
-It is based on the OpenSmpp library from http://smstools.wiki.sourceforge.net/
+It is based on the OpenSmpp library from http://sourceforge.net/projects/smstools/
 
 OpenSMPP is based on the original Logica SMPP libraries. It contains several
 bug fixes, and has been generally refactored.
