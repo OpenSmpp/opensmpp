@@ -61,7 +61,7 @@ Maven SNAPSHOT hosting is gratiously provided by [Sonatype](http://www.sonatype.
  *  [opensmpp-charset](https://repo1.maven.org/maven2/org/opensmpp/opensmpp-charset/3.0.0/opensmpp-charset-3.0.0.jar)
  *  [opensmpp-client](https://repo1.maven.org/maven2/org/opensmpp/opensmpp-client/3.0.0/opensmpp-client-3.0.0.jar)
     Requires `opensmpp-core`
- *  [opensmpp-sim](https://repo1.maven.org/maven2/org/opensmpp/opensmpp-sim/3.0.0/opensmpp-3.0.0.jar)
+ *  [opensmpp-sim](https://repo1.maven.org/maven2/org/opensmpp/opensmpp-sim/3.0.0/opensmpp-sim-3.0.0.jar)
     Requires `opensmpp-core`
 
 ## Source
