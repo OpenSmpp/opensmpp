@@ -231,6 +231,16 @@ public class ByteBuffer extends SmppObject {
 	}
 
 	public String removeCString() throws NotEnoughDataInByteBufferException, TerminatingZeroNotFoundException {
+		try {
+			return removeCString(Data.ENC_ASCII);
+		} catch (UnsupportedEncodingException e) {
+			// this can't happen as we use ASCII encoding
+			// whatever is in the buffer it gets interpreted as ascii
+		}
+		return null;
+	}
+	
+	public String removeCString(String encoding) throws NotEnoughDataInByteBufferException, TerminatingZeroNotFoundException, UnsupportedEncodingException {
 		int len = length();
 		int zeroPos = 0;
 		if (len == 0) {
@@ -240,18 +250,27 @@ public class ByteBuffer extends SmppObject {
 			zeroPos++;
 		}
 		if (zeroPos < len) { // found terminating zero
+			UnsupportedEncodingException encodingException = null;
 			String result = null;
 			if (zeroPos > 0) {
 				try {
-					result = new String(buffer, 0, zeroPos, Data.ENC_ASCII);
-				} catch (UnsupportedEncodingException e2) {
-					// this can't happen as we use ASCII encoding
-					// whatever is in the buffer it gets interpreted as ascii
+					if (encoding != null) {
+						result = new String(buffer, 0, zeroPos, encoding);
+					} else {
+						result = new String(buffer, 0, zeroPos, Data.ENC_ASCII);
+					}
+				} catch (UnsupportedEncodingException e) {
+					debug.write("Unsupported encoding exception " + e);
+					event.write(e, null);
+					encodingException = e;
 				}
 			} else {
 				result = new String("");
 			}
 			removeBytes0(zeroPos + 1);
+			if (encodingException != null) {
+				throw encodingException;
+			}
 			return result;
 		} else {
 			throw new TerminatingZeroNotFoundException();
