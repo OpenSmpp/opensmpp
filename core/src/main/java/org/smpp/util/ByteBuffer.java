@@ -243,14 +243,10 @@ public class ByteBuffer extends SmppObject {
 			String result = null;
 			if (zeroPos > 0) {
 				try {
-					result = new String(buffer, 0, zeroPos, Data.ENC_GSM7BIT);
-				} catch (UnsupportedEncodingException e) {
-					try {
-						result = new String(buffer, 0, zeroPos, Data.ENC_ASCII);
-					} catch (UnsupportedEncodingException e2) {
-						// this can't happen as we use ASCII encoding
-						// whatever is in the buffer it gets interpreted as ascii
-					}
+					result = new String(buffer, 0, zeroPos, Data.ENC_ASCII);
+				} catch (UnsupportedEncodingException e2) {
+					// this can't happen as we use ASCII encoding
+					// whatever is in the buffer it gets interpreted as ascii
 				}
 			} else {
 				result = new String("");
