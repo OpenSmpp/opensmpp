@@ -14,6 +14,8 @@ public class DefaultEventTest {
 	private ByteArrayOutputStream out;
 
 	private DefaultEvent event;
+	
+	private static final String newLine = System.getProperty("line.separator"); 
 
 	@Before
 	public void setup() {
@@ -42,7 +44,7 @@ public class DefaultEventTest {
 	@Test
 	public void testWrite() {
 		event.write("HELLO");
-		assertEquals("HELLO\n", out.toString());
+		assertEquals("HELLO" + newLine, out.toString());
 	}
 	@Test
 	public void testWriteException() {
@@ -51,7 +53,7 @@ public class DefaultEventTest {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ex.printStackTrace(new PrintStream(baos));
 
-			String expected = "Exception: " + baos.toString() + " END\n";
+			String expected = "Exception: " + baos.toString() + " END" + newLine;
 			event.write(ex, "END");
 			assertEquals(expected, out.toString());
 		}
