@@ -12,6 +12,7 @@ package org.smpp;
 
 import org.smpp.util.*;
 
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -241,7 +242,8 @@ public class TCPIPConnection extends Connection {
 		if (!opened) {
 			if (connType == CONN_CLIENT) {
 				try {
-					socket = socketFactory.createSocket(address, port);
+					socket = socketFactory.createSocket();
+					socket.connect(new InetSocketAddress(address,port), this.getConnectionTimeout());
 					initialiseIOStreams(socket);
 					opened = true;
 					debug.write(DCOM, "opened client tcp/ip connection to " + address + " on port " + port);

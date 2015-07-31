@@ -37,6 +37,12 @@ public abstract class Connection extends SmppObject {
 	 * new connection.
 	 */
 	private long receiveTimeout = Data.CONNECTION_RECEIVE_TIMEOUT;
+	
+	/**
+	 * Timeout for making connect to server (ie. SMSC) 
+	 * 
+	 */
+	private int connectionTimeout = Data.CONNECTION_TIMEOUT;
 
 	/**
 	 * The address of the remote end of the connection. 
@@ -123,6 +129,17 @@ public abstract class Connection extends SmppObject {
 	public synchronized void setReceiveTimeout(long receiveTimeout) {
 		this.receiveTimeout = receiveTimeout;
 	}
+	
+	/**
+	 * Sets timeout used for create new connection to server
+	 * for an instance of the derived Connection class.
+	 * 
+	 *
+	 * @param connectionTimeout new connection timeout value
+	 */
+	public synchronized void setConnectionTimeout(int connectionTimeout) {
+		this.connectionTimeout = connectionTimeout;
+	}
 
 	/**
 	 * Returns currently set timeout used for calls to underlying
@@ -144,6 +161,16 @@ public abstract class Connection extends SmppObject {
 	 */
 	public synchronized long getReceiveTimeout() {
 		return receiveTimeout;
+	}
+	
+	/**
+	 * Returns currently set timeout used for create new connection
+	 * communication functions for an instance of the derived Connection class.
+	 *
+	 * @return value of connection timeout
+	 */
+	public synchronized int getConnectionTimeout() {
+		return connectionTimeout;
 	}
 
 	public String getAddress() {
