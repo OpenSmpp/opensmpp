@@ -394,10 +394,20 @@ public abstract class PDU extends ByteData {
 	 * @see #setData(ByteBuffer)
 	 */
 	public ByteBuffer getData() throws ValueNotSetException {
+		// check if optional parameters is enabled
+		boolean enableOptional = true;
+		String optionalPara = (String) this.getApplicationSpecificInfo("smpp.optional.parameter.enabled");
+		if( optionalPara != null && optionalPara.equalsIgnoreCase("false")){
+			enableOptional = false;
+		}
+
 		// prepare all body
 		ByteBuffer bodyBuf = new ByteBuffer();
 		bodyBuf.appendBuffer(getBody());
-		bodyBuf.appendBuffer(getOptionalBody());
+		if(enableOptional) {
+			bodyBuf.appendBuffer(getOptionalBody());
+		}
+
 		// get its size and add size of the header; set the result as length
 		setCommandLength(bodyBuf.length() + Data.PDU_HEADER_SIZE);
 		ByteBuffer pduBuf = getHeader();

@@ -585,6 +585,8 @@ public class SubmitSM extends Request {
 		dbgs += " ";
 		dbgs += getDestAddr().debugString();
 		dbgs += " ";
+		dbgs += "(esmClass: " + this.getEsmClass()+ ", protocolId: " + this.getProtocolId()  +")";
+		dbgs += " ";
 		dbgs += shortMessage.debugString();
 		dbgs += " ";
 		dbgs += debugStringOptional();
