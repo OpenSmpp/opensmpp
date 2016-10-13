@@ -147,7 +147,7 @@ public abstract class ProcessingThread extends SmppObject implements Runnable {
 				try {
 					Thread.sleep(100); // we're waiting for the proc thread to start
 				} catch (InterruptedException e) {
-					event.write(e, e.getMessage());
+					Thread.currentThread().interrupt();
 				}
 			}
 		}
@@ -166,7 +166,7 @@ public abstract class ProcessingThread extends SmppObject implements Runnable {
 				try {
 					Thread.sleep(100); // we're waiting for the proc thread to stop
 				} catch (InterruptedException e) {
-					event.write(e, e.getMessage());
+					Thread.currentThread().interrupt();
 				}
 			}
 		}
