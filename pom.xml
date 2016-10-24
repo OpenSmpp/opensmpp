@@ -97,6 +97,9 @@
 	<profiles>
 		<profile>
 			<id>release-sign-artifacts</id>
+         <properties>
+            <gpg.executable>gpg2</gpg.executable>
+         </properties>
 			<activation>
 				<property>
 					<name>performRelease</name>
@@ -218,6 +221,8 @@
 				<version>2.9</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
+               <!-- Java 8 became stricter, and fails builds if it finds invalid Javadoc . Disable: -->
+               <additionalparam>-Xdoclint:none</additionalparam>
 				</configuration>
 				<executions>
 					<execution>
