@@ -25,8 +25,9 @@ public class Gsm7BitCharsetTest {
 	public void testEuroCharacterEncoding() {
 		assertEquals(ByteBuffer.wrap(new byte[] { (byte) 0x1b, (byte) 0x65 }), charset.encode("€"));
 	}
+
 	@Test
-	public void testEuroDecoding() {
+	public void testEuroCharacterDecoding() {
 		assertEquals(CharBuffer.wrap("€"), charset.decode(ByteBuffer.wrap(new byte[] { (byte) 0x1b, (byte) 0x65 })));
 	}
 }
