@@ -170,7 +170,7 @@ public class Gsm7BitCharset extends Charset {
 		{ "~",  new Byte((byte) 0x3d) },
 		{ "]",  new Byte((byte) 0x3e) },
 		{ "|",  new Byte((byte) 0x40) },
-		{ "",  new Byte((byte) 0x65) }
+		{ "€",  new Byte((byte) 0x65) }
 	};
 
 	private static Logger logger = Logger.getLogger(Gsm7BitCharset.class.getName());

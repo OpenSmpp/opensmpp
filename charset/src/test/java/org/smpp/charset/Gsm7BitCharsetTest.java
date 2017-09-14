@@ -31,4 +31,14 @@ public class Gsm7BitCharsetTest {
 	public void testDecoderOverflow() {
 		assertEquals(CoderResult.OVERFLOW, charset.newDecoder().decode(ByteBuffer.wrap(new byte[] { 0x30, 0x30 }), CharBuffer.allocate(1), true));
 	}
+
+	@Test
+	public void testEuroCharacterEncoding() {
+		assertEquals(ByteBuffer.wrap(new byte[] { (byte) 0x1b, (byte) 0x65 }), charset.encode("€"));
+	}
+
+	@Test
+	public void testEuroCharacterDecoding() {
+		assertEquals(CharBuffer.wrap("€"), charset.decode(ByteBuffer.wrap(new byte[] { (byte) 0x1b, (byte) 0x65 })));
+	}
 }
