@@ -51,6 +51,19 @@ public class ByteBufferTest {
 	}
 
 	@Test
+	public void testUnsignedByte() throws NotEnoughDataInByteBufferException {
+		// This demonstrates the inconvenient behaviour of signed Java bytes:
+		assertEquals((short) 0x7f, bufferOf((byte) 0x7f).removeByte());
+		assertEquals((short) -128, bufferOf((byte) 0x80).removeByte());
+		assertEquals((short) -1, bufferOf((byte) 0xff).removeByte());
+		
+		// ...which removeUnsignedByte() provides a solution for:
+		assertEquals((short) 0x7f, bufferOf((byte) 0x7f).removeUnsignedByte());
+		assertEquals((short) 0x80, bufferOf((byte) 0x80).removeUnsignedByte());
+		assertEquals((short) 0xff, bufferOf((byte) 0xff).removeUnsignedByte());
+	}
+
+	@Test
 	public void testAppendShort0() {
 		buffer.appendShort(t_short);
 		assertBufferMatches((byte) 0x02, (byte) 0x9a);

@@ -198,6 +198,14 @@ public class ByteBuffer extends SmppObject {
 		return result;
 	}
 
+	public short removeUnsignedByte() throws NotEnoughDataInByteBufferException {
+		short result = 0;
+		byte[] resBuff = removeBytes(SZ_BYTE).getBuffer();
+		result = (short) (resBuff[0] & 0xff);
+
+		return result;
+	}
+
 	public short removeShort() throws NotEnoughDataInByteBufferException {
 		short result = 0;
 		byte[] resBuff = removeBytes(SZ_SHORT).getBuffer();
