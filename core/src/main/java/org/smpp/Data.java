@@ -543,6 +543,7 @@ public class Data {
 	public static final long COMMS_TIMEOUT = 60000;
 	public static final long QUEUE_TIMEOUT = 10000;
 	public static final long ACCEPT_TIMEOUT = 60000;
+	public static final int CONNECTION_TIMEOUT = 60000;
 
 	public static final long RECEIVE_BLOCKING = -1;
 
