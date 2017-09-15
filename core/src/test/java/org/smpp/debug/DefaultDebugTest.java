@@ -19,6 +19,8 @@ public class DefaultDebugTest {
 	private ByteArrayOutputStream out;
 
 	private DefaultDebug debug;
+	
+	private static final String newLine = System.getProperty("line.separator"); 
 
 	@Before
 	public void setup() {
@@ -41,34 +43,34 @@ public class DefaultDebugTest {
 	@Test
 	public void testEnterWithName() {
 		debug.enter(0, OBJECT, NAME);
-		assertEquals("-> OBJECT NAME\n", out.toString());
+		assertEquals("-> OBJECT NAME" + newLine, out.toString());
 	}
 	@Test
 	public void testEnterWithoutName() {
 		debug.enter(0, OBJECT, EMPTY);
-		assertEquals("-> OBJECT\n", out.toString());
+		assertEquals("-> OBJECT" + newLine, out.toString());
 	}
 	@Test
 	public void testExit() {
 		debug.exit(0, OBJECT);
-		assertEquals("<- OBJECT\n", out.toString());
+		assertEquals("<- OBJECT" + newLine, out.toString());
 	}
 	@Test
 	public void testWrite() {
 		debug.write(0, "HELLO");
-		assertEquals(" HELLO\n", out.toString());
+		assertEquals(" HELLO" + newLine, out.toString());
 	}
 	@Test
 	public void testNestedEnter() {
 		debug.enter(OBJECT, NAME);
 		debug.enter(OBJECT, NAME);
-		assertEquals("-> OBJECT NAME\n  -> OBJECT NAME\n", out.toString());
+		assertEquals("-> OBJECT NAME" + newLine + "  -> OBJECT NAME" + newLine, out.toString());
 	}
 	@Test
 	public void testNestedWrite() {
 		debug.enter(0, OBJECT, NAME);
 		debug.write(0, "HELLO");
-		assertEquals("-> OBJECT NAME\n   HELLO\n", out.toString());
+		assertEquals("-> OBJECT NAME" + newLine + "   HELLO" + newLine, out.toString());
 	}
 	@Test
 	public void testDeactivate() {
@@ -80,7 +82,7 @@ public class DefaultDebugTest {
 	public void testDeactiveGroupDoesNothing() {
 		debug.deactivate(0);
 		debug.write(0, "HELLO");
-		assertEquals(" HELLO\n", out.toString());
+		assertEquals(" HELLO" + newLine, out.toString());
 	}
 	@Test
 	public void testActivateGroupDoesNothing() {
