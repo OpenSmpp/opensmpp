@@ -11,6 +11,9 @@
 package org.smpp.smscsim;
 
 import org.smpp.pdu.SubmitSM;
+import org.smpp.util.DataCodingCharsetHandler;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Class for storing a subset of attributes of messages to a message store.
@@ -32,12 +35,14 @@ class ShortMessageValue {
 	 * @param systemId system id of the client
 	 * @param submit the PDU send from the client
 	 */
-	ShortMessageValue(String systemId, SubmitSM submit) {
+	ShortMessageValue(String systemId, SubmitSM submit) throws UnsupportedEncodingException {
 		this.systemId = systemId;
 		serviceType = submit.getServiceType();
 		sourceAddr = submit.getSourceAddr().getAddress();
 		destinationAddr = submit.getDestAddr().getAddress();
-		shortMessage = submit.getShortMessage();
+
+		String encoding = DataCodingCharsetHandler.getCharsetName(submit.getDataCoding());
+		shortMessage = submit.getShortMessage(encoding);
 	}
 }
 /*

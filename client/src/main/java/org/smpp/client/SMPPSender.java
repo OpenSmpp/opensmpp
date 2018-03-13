@@ -22,6 +22,7 @@ import org.smpp.pdu.SubmitSM;
 import org.smpp.pdu.SubmitSMResp;
 import org.smpp.pdu.UnbindResp;
 import org.smpp.pdu.WrongLengthOfStringException;
+import org.smpp.util.DataCodingCharsetHandler;
 
 /**
  * Class <code>SMPPTest</code> shows how to use the SMPP toolkit.
@@ -320,7 +321,9 @@ public class SMPPSender {
 			}
 			request.setDestAddr(new Address((byte)1, (byte)1, destAddress));
 			request.setReplaceIfPresentFlag(replaceIfPresentFlag);
-			request.setShortMessage(shortMessage,Data.ENC_GSM7BIT);
+
+			String encoding = DataCodingCharsetHandler.getCharsetName(dataCoding);
+			request.setShortMessage(shortMessage, encoding);
 			request.setScheduleDeliveryTime(scheduleDeliveryTime);
 			request.setValidityPeriod(validityPeriod);
 			request.setEsmClass(esmClass);

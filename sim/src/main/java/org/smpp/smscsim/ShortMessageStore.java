@@ -10,6 +10,7 @@
  */
 package org.smpp.smscsim;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -48,7 +49,7 @@ public class ShortMessageStore {
 	 * @see ShortMessageValue
 	 * @see org.smpp.pdu.SubmitSM
 	 */
-	public synchronized void submit(SubmitSM message, String messageId, String systemId) {
+	public synchronized void submit(SubmitSM message, String messageId, String systemId) throws UnsupportedEncodingException {
 		messages.put(messageId, new ShortMessageValue(systemId, message));
 	}
 
