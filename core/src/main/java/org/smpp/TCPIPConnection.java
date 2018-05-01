@@ -39,6 +39,7 @@ import javax.net.SocketFactory;
  * @see java.io.BufferedOutputStream
  */
 public class TCPIPConnection extends Connection {
+	private int requestedPort = 0;
 	/**
 	 * The port number on the remote host to which the <code>socket</code>
 	 * is connected or port number where <code>receiverSocket</code>
@@ -174,11 +175,11 @@ public class TCPIPConnection extends Connection {
 	 * The accepting of the connection must be invoked explicitly by
 	 * calling of <code>accept</code> method.
 	 *
-	 * @param port the port number to listen on
+	 * @param port the port number to listen on (or zero to assign an ephemeral port)
 	 */
 	public TCPIPConnection(int port) {
-		if ((port >= Data.MIN_VALUE_PORT) && (port <= Data.MAX_VALUE_PORT)) {
-			this.port = port;
+		if ( port == 0 ||  (port >= Data.MIN_VALUE_PORT && port <= Data.MAX_VALUE_PORT)) {
+			this.requestedPort = port;
 		} else {
 			debug.write("Invalid port.");
 		}
@@ -198,7 +199,7 @@ public class TCPIPConnection extends Connection {
 		} else {
 			debug.write("Invalid address.");
 		}
-		if ((port >= Data.MIN_VALUE_PORT) && (port <= Data.MAX_VALUE_PORT)) {
+		if ((port >= Data.MIN_VALUE_PORT) && (port <= Data.MAX_VALUE_PORT) ) {
 			this.port = port;
 		} else {
 			debug.write("Invalid port.");
@@ -254,9 +255,10 @@ public class TCPIPConnection extends Connection {
 				}
 			} else if (connType == CONN_SERVER) {
 				try {
-					receiverSocket = serverSocketFactory.createServerSocket(port);
+					receiverSocket = serverSocketFactory.createServerSocket(requestedPort);
 					opened = true;
-					debug.write(DCOM, "listening tcp/ip on port " + port);
+					this.port = receiverSocket.getLocalPort();
+					debug.write(DCOM, "listening tcp/ip on port " + this.port);
 				} catch (IOException e) {
 					debug.write("IOException creating listener socket " + e);
 					exception = e;
@@ -568,6 +570,10 @@ public class TCPIPConnection extends Connection {
 	 */
 	public boolean isOpened() {
 		return opened;
+	}
+
+	public int getPort() {
+		return this.port;
 	}
 }
 /*
