@@ -488,28 +488,34 @@ public class Session extends SmppObject {
 					new UnbindServerPDUEventListener(this, origListener, unbindReq);
 				setServerPDUEventListener(unbindListener);
 				synchronized (unbindListener) {
+					event.write("sending unbindReq");
 					send(unbindReq);
 					try {
+						debug.write("unbindListener.wait()");
 						unbindListener.wait(receiver.getReceiveTimeout());
+						debug.write("unbindListener.getUnbindResp()");
 						unbindResp = unbindListener.getUnbindResp();
+						event.write("got unbindResp");
 					} catch (InterruptedException e) {
-						// unbind reponse wasn't received in time
+						// unbind response wasn't received in time
 					}
 				}
 			} else {
-				debug.write(DSESS, "going to unbound sync session");
+				debug.write(DSESS, "going to unbind sync session");
 				unbindResp = (UnbindResp) send(unbindReq);
 			}
 			bound = (unbindResp == null);
 			if (!bound) {
 				setState(STATE_OPENED);
+				event.write("stopping receiver");
 				receiver.stop();
+				event.write("receiver stopped");
 				receiver = null;
 				transmitter = null;
 				close();
 			} else {
-				// restore the listener - unbind unsuccessfull
-				debug.write("Unbind unsuccessfull, restoring listener");
+				// restore the listener - unbind unsuccessful
+				event.write("Unbind unsuccessful, restoring listener");
 				setServerPDUEventListener(origListener);
 			}
 		}
