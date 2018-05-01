@@ -328,7 +328,6 @@ public class TCPIPConnection extends Connection {
 
 	/**
 	 * Sends data over the connection. Must be client type connection.
-	 * The timeout for sending is set by <code>setCommsTimeout</code>.
 	 *
 	 * @see java.net.Socket
 	 */
@@ -342,7 +341,6 @@ public class TCPIPConnection extends Connection {
 		}
 		if (connType == CONN_CLIENT) {
 			try {
-				socket.setSoTimeout((int) getCommsTimeout());
 				try {
 					outputStream.write(data.getBuffer(), 0, data.length());
 					debug.write(DCOM, "sent " + data.length() + " bytes to " + address + " on port " + port);
