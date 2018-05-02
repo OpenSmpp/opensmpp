@@ -94,7 +94,9 @@ public class ClientSessionUnbindIT extends SmppObject {
 		clientEvent("connecting");
 		TCPIPConnection clientConnection = new TCPIPConnection("127.0.0.1", listenPort);
 		clientConnection.setReceiveTimeout(2 * 1000);
-		clientConnection.setCommsTimeout(1 * 1000);
+		// The setting is especially detrimental to quick client shutdowns on unbind, but the global
+		// setting is low enough to limit the impact: https://github.com/OpenSmpp/opensmpp/issues/33
+		clientConnection.setCommsTimeout(Data.COMMS_TIMEOUT);
 
 		clientSession = new Session(clientConnection);
 		clientSession.open();

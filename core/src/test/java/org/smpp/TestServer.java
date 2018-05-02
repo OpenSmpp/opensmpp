@@ -25,9 +25,9 @@ class TestServer extends SmppObject implements Runnable {
 	private long receiverReceiveTimeout = GLOBAL_DEFAULT_TIMEOUT;
 	private long acceptedSocketCommsTimeout = GLOBAL_DEFAULT_TIMEOUT;
 	private long acceptedSocketReceiveTimeout = GLOBAL_DEFAULT_TIMEOUT;
-	// This setting is especially detrimental to quick server shutdowns, and seems harmless to
-	// decrease (should have zero negative effect):
-	private long receiverQueueWaitTimeout = 1 * 1000;
+	// This setting is especially detrimental to quick server shutdowns (but the global default is
+	// low enough to limit the impact: https://github.com/OpenSmpp/opensmpp/issues/33)
+	private long receiverQueueWaitTimeout = Data.QUEUE_TIMEOUT;
 	
 	public void stop() {
 		this.keepRunning = false;

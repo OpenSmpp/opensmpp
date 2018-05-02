@@ -540,8 +540,8 @@ public class Data {
 	// all times in milliseconds
 	public static final long RECEIVER_TIMEOUT = 60000;
 	public static final long CONNECTION_RECEIVE_TIMEOUT = 10000;
-	public static final long COMMS_TIMEOUT = 60000;
-	public static final long QUEUE_TIMEOUT = 10000;
+	public static final long COMMS_TIMEOUT = 2000; // See https://github.com/OpenSmpp/opensmpp/issues/33
+	public static final long QUEUE_TIMEOUT = 2000; // See https://github.com/OpenSmpp/opensmpp/issues/33
 	public static final long ACCEPT_TIMEOUT = 60000;
 	public static final int CONNECTION_TIMEOUT = 60000;
 
