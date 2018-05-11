@@ -22,6 +22,7 @@ import org.smpp.smscsim.SimulatorPDUProcessorFactory;
 import org.smpp.smscsim.util.Table;
 
 /**
+ * <p>
  * Class <code>Simulator</code> is an application class behaving as a real
  * SMSC with SMPP interface.
  * Clients (ESMEs) can bind to it, send requests to which this application
@@ -34,14 +35,21 @@ import org.smpp.smscsim.util.Table;
  * <p>
  * This simulator application uses <code>SimulatorPDUProcessor</code> to process
  * the PDUs received from the clients.
+ * </p>
  * <p>
  * To run this application using <b>smpp.jar</b> and <b>smscsim.jar</b> library files execute
  * the following command:
- * <p>
- * <code>java -cp smpp.jar:smscsim.jar org.smpp.smscsim.Simulator</code>
+ * </p>
+ * <pre>
+ * java -cp smpp.jar:smscsim.jar org.smpp.smscsim.Simulator
+ * </pre>
  * <p>
  * If your libraries are stored in other that default directory, use the
  * directory name in the <code>-cp</code> argument.
+ * </p>
+ * <p>
+ * User file can be specified using <code>usersFileName</code> property, e.g.: <code>-DusersFileName=/my/path/to/users.txt</code>
+ * </p>
  * 
  * @author Logica Mobile Networks SMPP Open Source Team
  * @version $Id: Simulator.java 72 2008-07-15 19:43:00Z sverkera $
@@ -64,7 +72,7 @@ public class Simulator {
 	/**
 	 * Name of file with user (client) authentication information.
 	 */
-	static String usersFileName = "etc/users.txt";
+	static String usersFileName = System.getProperty("usersFileName", "etc/users.txt");
 
 	/**
 	 * Directory for creating of debug and event files.
