@@ -93,8 +93,12 @@ public class DeliveryInfoSender extends ProcessingThread {
 		msg += "stat:" + states[entry.stat] + " ";
 		msg += "err:" + entry.err + " ";
 		String shortMessage = submit.getShortMessage();
-		int msgLen = shortMessage.length();
-		msg += "text:" + shortMessage.substring(0, (msgLen > 20 ? 20 : msgLen));
+		if (shortMessage == null) {
+			msg += "text:";
+		} else {
+			int msgLen = shortMessage.length();
+			msg += "text:" + shortMessage.substring(0, (msgLen > 20 ? 20 : msgLen));
+		}
 		try {
 			deliver.setShortMessage(msg);
 			deliver.setServiceType(submit.getServiceType());

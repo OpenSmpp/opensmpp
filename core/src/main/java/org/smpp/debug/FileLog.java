@@ -146,26 +146,9 @@ public class FileLog {
 	}
 
 	public static String getLineTimeStamp() {
-		String retDate = "";
-		String padString = "";
 		Calendar fullCalendar = Calendar.getInstance();
-
-		//for naming Validations, the array goes from 0-6 DAY_OF_WEEK is 1-7	
-		padString = Integer.toString(fullCalendar.get(Calendar.HOUR));
-		retDate += zeroPad(2, padString);
-		padString = Integer.toString(fullCalendar.get(Calendar.MINUTE));
-		retDate += ":" + zeroPad(2, padString);
-		padString = Integer.toString(fullCalendar.get(Calendar.SECOND));
-		retDate += ":" + zeroPad(2, padString);
+		String retDate = String.format("%1$tF %1$tT", fullCalendar);
 		return retDate;
-	}
-
-	protected static String zeroPad(int length, String toPad) {
-		int numberOfZeroes = length - toPad.length();
-		for (int counter = 0; counter < numberOfZeroes; counter++) {
-			toPad = "0" + toPad;
-		}
-		return toPad;
 	}
 
 	synchronized protected void blankLine() {
