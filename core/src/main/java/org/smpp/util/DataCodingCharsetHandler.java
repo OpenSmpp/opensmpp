@@ -16,6 +16,12 @@ public class DataCodingCharsetHandler {
 		DATA_CODING_CHARSET = new HashMap<Byte, String>();
 		DATA_CODING_CHARSET.put((byte) 0, Data.ENC_GSM7BIT);
 		DATA_CODING_CHARSET.put((byte) 8, Data.ENC_UTF16);
+		
+		///Based on SMPP 3.4 specification, paragraph 5.2.19 & GSM 03.38, Section 4
+		DATA_CODING_CHARSET.put((byte) 0xF4, Data.ENC_ISO8859_1);
+		DATA_CODING_CHARSET.put((byte) 0xF5, Data.ENC_ISO8859_1);
+		DATA_CODING_CHARSET.put((byte) 0xF6, Data.ENC_ISO8859_1);
+		DATA_CODING_CHARSET.put((byte) 0xF7, Data.ENC_ISO8859_1);
 	}
 
 	/**
