@@ -6,7 +6,7 @@
 		<groupId>org.opensmpp</groupId>
 		<artifactId>opensmpp-parent</artifactId>
 		<version>3.0.3-SNAPSHOT</version>
-	</parent>	
+	</parent>
 	<artifactId>opensmpp-charset</artifactId>
 	<packaging>jar</packaging>
 	<name>OpenSMPP Character Sets</name>
