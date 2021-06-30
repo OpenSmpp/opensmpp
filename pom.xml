@@ -12,6 +12,11 @@
 	</description>
 	<url>http://opensmpp.org/</url>
 
+	<properties>
+		<maven.compiler.source>1.5</maven.compiler.source>
+		<maven.compiler.target>1.5</maven.compiler.target>
+	  </properties>
+
 	<modules>
 		<module>core</module>
 		<module>charset</module>
