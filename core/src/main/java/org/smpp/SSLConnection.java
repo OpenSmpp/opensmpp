@@ -67,4 +67,20 @@ public class SSLConnection extends TCPIPConnection {
 	public SSLConnection(SSLSocket sslsocket) throws IOException {
 		super(sslsocket);
 	}
+
+	/**
+	 * Create method to get SocketFactory to override the variable hiding
+	 * in SSLConnection. Use to get SSLSocketFactory instead of defaultSocketFactory
+	 */
+	public SocketFactory getSocketFactory() {
+		return this.socketFactory;
+	}
+
+	/**
+	 * Create method to get SocketFactory to override the variable hiding
+	 * in SSLConnection. Use to get SSLSocketFactory instead of defaultServerSocketFactory
+	 */
+	public ServerSocketFactory getServerSocketFactory() {
+		return this.serverSocketFactory;
+	}
 }

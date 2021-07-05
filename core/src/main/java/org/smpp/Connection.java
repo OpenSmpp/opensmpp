@@ -15,6 +15,8 @@ import java.io.IOException;
 import org.smpp.Data;
 import org.smpp.util.ByteBuffer;
 
+import javax.net.SocketFactory;
+
 /**
  * Abstract class defining necessary abstract methods for communication
  * over socket based network communication interface. It defines methods
@@ -176,6 +178,12 @@ public abstract class Connection extends SmppObject {
 	public String getAddress() {
 		return address;
 	}
+
+	/**
+	 * Create method to get SocketFactory to override the variable hiding
+	 * in SSLConnection. Use to get SSLSocketFactory instead of defaultSocketFactory
+	 */
+	public abstract SocketFactory getSocketFactory();
 }
 
 /*

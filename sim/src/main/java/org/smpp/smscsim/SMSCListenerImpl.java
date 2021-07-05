@@ -14,6 +14,7 @@ import java.io.InterruptedIOException;
 import java.io.IOException;
 
 import org.smpp.Connection;
+import org.smpp.SSLConnection;
 import org.smpp.SmppObject;
 
 /**
@@ -72,7 +73,12 @@ public class SMSCListenerImpl extends SmppObject implements Runnable, SMSCListen
 	public synchronized void start() throws IOException {
 		debug.write("going to start SMSCListener on port " + port);
 		if (!isReceiving) {
-			serverConn = new org.smpp.TCPIPConnection(port);
+			if(System.getProperty("javax.net.ssl.keyStore") == null || System.getProperty("javax.net.ssl.keyStorePassword") == null ||
+					System.getProperty("javax.net.ssl.keyStore").equals("") || System.getProperty("javax.net.ssl.keyStorePassword").equals("") ) {
+				serverConn = new org.smpp.TCPIPConnection(port);
+			} else {
+				serverConn = new org.smpp.SSLConnection(port);
+			}
 			serverConn.setReceiveTimeout(getAcceptTimeout());
 			serverConn.open();
 			keepReceiving = true;

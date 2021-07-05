@@ -8,7 +8,9 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
+import org.smpp.Connection;
 import org.smpp.Data;
+import org.smpp.SSLConnection;
 import org.smpp.Session;
 import org.smpp.TCPIPConnection;
 import org.smpp.pdu.Address;
@@ -55,6 +57,11 @@ public class SMPPSender {
 	 * If the application is bound to the SMSC.
 	 */
 	boolean bound = false;
+
+	/**
+	 * If application should use TLS.
+	 */
+	private static boolean useTLS = false;
 
 	/**
 	 * Address of the SMSC.
@@ -155,6 +162,8 @@ public class SMPPSender {
 					message = args[++i];
 				} else if(opt.compareToIgnoreCase("file") == 0) {
 					propsFilePath = args[++i];
+				} else if(opt.compareToIgnoreCase("tls") == 0) {
+					useTLS = true;
 				}
 			}
 		}
@@ -224,7 +233,12 @@ public class SMPPSender {
 
 			request = new BindTransmitter();
 
-			TCPIPConnection connection = new TCPIPConnection(ipAddress, port);
+			Connection connection;
+			if(useTLS) {
+				connection = new SSLConnection(ipAddress, port);
+			} else {
+				connection = new TCPIPConnection(ipAddress, port);
+			}
 			connection.setReceiveTimeout(20 * 1000);
 			session = new Session(connection);
 
