@@ -22,7 +22,7 @@ Versions of this project are managed according to the
 
 # Build Status
 
-[![Build Status](https://travis-ci.org/OpenSmpp/opensmpp.png?branch=master)](https://travis-ci.org/OpenSmpp/opensmpp)
+[![Build Status](https://travis-ci.com/OpenSmpp/opensmpp.png?branch=master)](https://travis-ci.com/OpenSmpp/opensmpp)
 
 # License
 
