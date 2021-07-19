@@ -24,6 +24,8 @@ import java.io.InterruptedIOException;
 
 import javax.net.ServerSocketFactory;
 import javax.net.SocketFactory;
+import javax.net.ssl.SSLSocket;
+import sun.security.ssl.SSLSocketImpl;
 
 /**
  * Implementation of TCP/IP type of communication.
@@ -243,7 +245,7 @@ public class TCPIPConnection extends Connection {
 		if (!opened) {
 			if (connType == CONN_CLIENT) {
 				try {
-					socket = socketFactory.createSocket();
+					socket = this.getSocketFactory().createSocket();
 					if( System.getProperty("bind.address") != null ) {
 						socket.bind( new java.net.InetSocketAddress( java.net.InetAddress.getByName(System.getProperty("bind.address")), 0) );
 					}
@@ -259,9 +261,9 @@ public class TCPIPConnection extends Connection {
 			} else if (connType == CONN_SERVER) {
 				try {
 					if( System.getProperty("bind.address") == null ) {
-						receiverSocket = serverSocketFactory.createServerSocket(requestedPort);
+						receiverSocket = this.getServerSocketFactory().createServerSocket(requestedPort);
 					} else {
-						receiverSocket = serverSocketFactory.createServerSocket(requestedPort, 0, java.net.InetAddress.getByName(System.getProperty("bind.address")));
+						receiverSocket = this.getServerSocketFactory().createServerSocket(requestedPort, 0, java.net.InetAddress.getByName(System.getProperty("bind.address")));
 					}
 					opened = true;
 					this.port = receiverSocket.getLocalPort();
@@ -497,7 +499,12 @@ public class TCPIPConnection extends Connection {
 			}
 			if (acceptedSocket != null) {
 				try {
-					newConn = new TCPIPConnection(acceptedSocket);
+					if(acceptedSocket instanceof SSLSocket) {
+						newConn = new SSLConnection((SSLSocket)acceptedSocket);
+					}
+					else {
+						newConn = new TCPIPConnection(acceptedSocket);
+					}
 				} catch (IOException e) {
 					debug.write("IOException creating new client connection " + e);
 					event.write(e, "IOException creating new client connection");
@@ -580,6 +587,23 @@ public class TCPIPConnection extends Connection {
 	public int getPort() {
 		return this.port;
 	}
+
+	/**
+	 * Create method to get SocketFactory to override the variable hiding
+	 * in SSLConnection. Use to get SSLSocketFactory instead of defaultSocketFactory
+	 */
+	public SocketFactory getSocketFactory() {
+		return this.socketFactory;
+	}
+
+	/**
+	 * Create method to get SocketFactory to override the variable hiding
+	 * in SSLConnection. Use to get SSLSocketFactory instead of defaultSocketFactory
+	 */
+	public ServerSocketFactory getServerSocketFactory() {
+		return this.serverSocketFactory;
+	}
+
 }
 /*
  * $Log: not supported by cvs2svn $
