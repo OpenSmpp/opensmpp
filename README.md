@@ -15,6 +15,11 @@ bug fixes, and has been generally refactored.
  *  client - a simple SMPP client
  *  sim - a simple SMSC simulator
 
+How to build and run Simulator with Docker:
+
+      $ ./scripts/docker-build
+      $ ./scripts/docker-run
+
 # Versions
 
 Versions of this project are managed according to the
