@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# remove all: stopped containers, unused networks, dangling images, build cache
+# docker system prune
+
+# remove dangling images
+
+dangling_images='docker images -f dangling=true -q'
+
+if [ $( $dangling_images |wc -l ) -gt 0 ]; then
+    docker rmi $( $dangling_images )
+    printf "* Dangling images have been removed\n"
+fi
+
+# remove exited containers
+
+exited_containers='docker ps -a -f status=exited -f status=created -q'
+
+if [ $( $exited_containers |wc -l ) -gt 0 ]; then
+    docker rm $( $exited_containers )
+    printf "* Exited containers have been removed\n"
+fi

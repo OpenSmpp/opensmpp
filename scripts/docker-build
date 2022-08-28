@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker build -t opensmpp-sim:3.0.3 .
