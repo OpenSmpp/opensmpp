@@ -19,18 +19,22 @@ bug fixes, and has been generally refactored.
 
 Build and run Simulator with Docker:
 
-      $ ./scripts/docker-build
-      $ ./scripts/docker-run
+    $ ./scripts/docker-build
+    $ ./scripts/docker-run
 
-Or use `docker compose`:
+or use `docker compose`:
 
     $ docker-compose up -d
 
-To test Simulator:
+Send requests to Simulator with Python:
 
     $ cd client-py
-    $ poetry install
+    $ poetry install  # for the first time only
     $ ./bin/run
+
+in a separate terminal:
+
+    $ docker logs -f opensmpp-simulator-1
 
 # Versions
 
