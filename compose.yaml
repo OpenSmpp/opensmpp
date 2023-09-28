@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  sim:
+    container_name: opensmpp-sim-1
+    image: codcod66/opensmpp-sim
+    build:
+      dockerfile: ./sim.Dockerfile
+    ports:
+      - "2775:2775"

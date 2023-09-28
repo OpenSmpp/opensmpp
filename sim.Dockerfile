@@ -1,12 +1,8 @@
-# The following images also work but produce images twice as big:
-#
-# - FROM maven:3-jdk-11-slim AS builder
-# - FROM openjdk:11
-#
-# The following can be used on MacOS:
-#
-# FROM --platform=linux/amd64 ibmjava:8-sdk
+# syntax=docker/dockerfile:1
 
+#
+# build
+#
 
 FROM maven:3.6-jdk-8-alpine AS builder
 
@@ -14,7 +10,16 @@ COPY . /app/src
 
 RUN mvn -f /app/src/pom.xml clean package
 
+#
+# compile
+#
+
 FROM adoptopenjdk/openjdk8
+
+LABEL maintainer="codcod" \
+      opensmpp-version="3.0.3" \
+      opensmpp-dockerized-version="0.0.1" \
+      opensmpp-dockerized-date="2023-09-28"
 
 COPY --from=builder /app/src/charset/target/opensmpp-charset-3.0.3-SNAPSHOT.jar /app/charset.jar
 COPY --from=builder /app/src/client/target/opensmpp-client-3.0.3-SNAPSHOT.jar /app/client.jar

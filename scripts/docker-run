@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-docker run -p 2775:2775 -it opensmpp-sim:3.0.3
