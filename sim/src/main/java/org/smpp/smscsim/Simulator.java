@@ -121,7 +121,8 @@ public class Simulator {
 		debug.deactivate(SmppObject.DCOMD);
 		debug.deactivate(DSIMD2);
 		Simulator menu = new Simulator();
-		menu.menu();
+		//menu.menu();
+		menu.start();
 	}
 
 	/**
