@@ -15,10 +15,22 @@ bug fixes, and has been generally refactored.
  *  client - a simple SMPP client
  *  sim - a simple SMSC simulator
 
-How to build and run Simulator with Docker:
+# Simulator
+
+Build and run Simulator with Docker:
 
       $ ./scripts/docker-build
       $ ./scripts/docker-run
+
+Or use `docker compose`:
+
+    $ docker-compose up -d
+
+To test Simulator:
+
+    $ cd client-py
+    $ poetry install
+    $ ./bin/run
 
 # Versions
 
