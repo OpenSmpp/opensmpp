@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+PYTHONPATH=. poetry run python smsc_client/client.py
+
+# vim: ft=sh:sw=4:et:ai
