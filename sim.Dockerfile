@@ -18,8 +18,8 @@ FROM adoptopenjdk/openjdk8
 
 LABEL maintainer="codcod" \
       opensmpp-version="3.0.3" \
-      opensmpp-dockerized-version="0.0.1" \
-      opensmpp-dockerized-date="2023-09-28"
+      opensmpp-dockerized-version="0.1.0" \
+      opensmpp-dockerized-date="2023-10-20"
 
 COPY --from=builder /app/src/charset/target/opensmpp-charset-3.0.3-SNAPSHOT.jar /app/charset.jar
 COPY --from=builder /app/src/client/target/opensmpp-client-3.0.3-SNAPSHOT.jar /app/client.jar
