@@ -1,7 +1,7 @@
 """ App settings.
 """
 
-SMSC_HOST = '127.0.01'
+SMSC_HOST = '127.0.0.1'
 
 SMSC_PORT = 2775
 
