@@ -22,6 +22,8 @@ Build and run Simulator with Docker:
     $ docker-compose up -d
     $ docker logs -f opensmpp-sim-1
 
+Get the image from [Docker Hub](https://hub.docker.com/r/codcod66/opensmpp-sim).
+
 See [client-py](client-py/README.md) for details on how to run the Python client.
 
 # Versions
