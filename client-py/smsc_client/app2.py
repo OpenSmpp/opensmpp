@@ -11,6 +11,8 @@ from smpplib.pdu import PDU
 
 from smsc_client import settings
 
+__all__ = 'send'
+
 logging.config.dictConfig(settings.LOGGING)
 logger = logging.getLogger('SMSCApp2')
 
