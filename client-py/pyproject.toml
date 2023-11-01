@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 smpplib = "^2.2.3"
+colorlog = "^6.7.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.10.0"
@@ -22,7 +23,16 @@ build-backend = "poetry.core.masonry.api"
 [tool.black]
 line-length = 88
 skip-string-normalization = 1
-target-version = ['py310']
+target-version = ["py310"]
+include = '\.pyi?$'
+extend-exclude = '''
+# A regex preceded with ^/ will apply only to files and directories
+# in the root of the project.
+(
+  ^/foo.py       # exclude a file named foo.py in the root of the project
+  | settings.py  # exclude settings file anywhere in the project
+)
+'''
 
 [tool.isort]
 profile = "black"

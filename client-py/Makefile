@@ -16,4 +16,4 @@ fix:
 	poetry run ruff $(APP_DIR)/**
 
 run:
-	poetry run python smsc_client/client.py
+	poetry run python smsc_client/app2.py
