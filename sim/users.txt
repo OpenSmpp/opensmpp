@@ -19,9 +19,16 @@
 # "peter" and " peter".
 
 
-# Pavel can bound for unlimited time as any type
-name=pavel
-password=dfsew
+name=smppclient1
+password=password
+timeout=unlimited
+
+name=smppclient2
+password=password
+timeout=unlimited
+
+name=smppclient3
+password=password
 timeout=unlimited
 
 

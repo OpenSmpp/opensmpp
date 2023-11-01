@@ -50,7 +50,7 @@ import org.smpp.smscsim.util.Table;
  * <p>
  * User file can be specified using <code>usersFileName</code> property, e.g.: <code>-DusersFileName=/my/path/to/users.txt</code>
  * </p>
- * 
+ *
  * @author Logica Mobile Networks SMPP Open Source Team
  * @version $Id: Simulator.java 72 2008-07-15 19:43:00Z sverkera $
  * @see SimulatorPDUProcessor
@@ -121,7 +121,8 @@ public class Simulator {
 		debug.deactivate(SmppObject.DCOMD);
 		debug.deactivate(DSIMD2);
 		Simulator menu = new Simulator();
-		menu.menu();
+		//menu.menu();
+		menu.start();
 	}
 
 	/**
@@ -197,15 +198,17 @@ public class Simulator {
 	/**
 	 * Permits a user to choose the port where to listen on and then creates and
 	 * starts new instance of <code>SMSCListener</code>.
-	 * An instance of the <code>SimulatorPDUProcessor</code> is created 
+	 * An instance of the <code>SimulatorPDUProcessor</code> is created
 	 * and this instance is passed to the <code>SMSCListener</code> which is started
 	 * just after.
 	 */
 	protected void start() throws IOException {
 		if (smscListener == null) {
-			System.out.print("Enter port number> ");
-			int port = Integer.parseInt(keyboard.readLine());
-			System.out.print("Starting listener... ");
+			// System.out.print("Enter port number> ");
+			// int port = Integer.parseInt(keyboard.readLine());
+			// System.out.print("Starting listener... ");
+			System.out.print("Listening on port 2775 ");
+			int port = 2775;
 			smscListener = new SMSCListenerImpl(port, true);
 			processors = new PDUProcessorGroup();
 			messageStore = new ShortMessageStore();
@@ -343,7 +346,7 @@ public class Simulator {
 
 	/**
 	 * Permits data to be sent to a specific client.
-	 * With the id of the client set by the user, the method <code>sendMessage</code> 
+	 * With the id of the client set by the user, the method <code>sendMessage</code>
 	 * gets back the specific reference to the client's <code>PDUProcessor</code>.
 	 * With this reference you are able to send data to the client.
 	 */
@@ -399,7 +402,7 @@ public class Simulator {
  * Revision 1.1  2003/07/23 00:28:39  sverkera
  * Imported
  *
- * 
+ *
  * Old changelog:
  * 20-09-01 ticp@logica.com added support for sending of delivery info
  * 26-09-01 ticp@logica.com debug now in a group

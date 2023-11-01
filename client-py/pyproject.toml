@@ -1,0 +1,59 @@
+[tool.poetry]
+name = "smsc-client"
+version = "0.1.0"
+description = ""
+authors = ["codcod"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+smpplib = "^2.2.3"
+colorlog = "^6.7.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.10.0"
+flake8 = "^6.1.0"
+isort = "^5.12.0"
+ruff = "^0.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+skip-string-normalization = 1
+target-version = ["py310"]
+include = '\.pyi?$'
+extend-exclude = '''
+# A regex preceded with ^/ will apply only to files and directories
+# in the root of the project.
+(
+  ^/foo.py       # exclude a file named foo.py in the root of the project
+  | settings.py  # exclude settings file anywhere in the project
+)
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+auto_identify_namespace_packages = false
+force_single_line = true
+known_first_party = ["smsc_client"]
+
+[tool.ruff]
+fixable = ["ALL"]
+unfixable = []
+
+exclude = [
+    ".git",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv",
+    "__pypackages__",
+    "build",
+    "dist",
+]
+line-length = 88
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+target-version = "py310"
